@@ -54,16 +54,33 @@ CREATE TABLE IF NOT EXISTS Employee (
 	ssn int PRIMARY KEY,
 	first_name text NOT NULL,
 	last_name text NOT NULL,
+	email text UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
 	address text NOT NULL,
 	phone int NOT NULL,
 	age int NOT NULL,
 	sex gender NOT NULL,
-	job_type job_types NOT NULL,
-	admin_type text,
-	engineer_type text,
-	monitor_shift text,
-	authority_position text,
+	job_type job_types NOT NULL REFERENCES Salary ON DELETE CASCADE ON UPDATE CASCADE,
 	airport_name text NOT NULL REFERENCES Airport(name) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Adminsitration (
+	ssn int PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+	type text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Enginner (
+	ssn int PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+	type text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Traffic_monitor (
+	ssn int PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+	shift text NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Airport_Authority (
+	ssn int PRIMARY KEY REFERENCES Employee ON DELETE CASCADE ON UPDATE CASCADE,
+	position text NOT NULL
 );
 
 
@@ -93,11 +110,11 @@ CREATE TABLE IF NOT EXISTS Flight (
 	airline_id text NOT NULL REFERENCES Airline(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
 CREATE TABLE IF NOT EXISTS Passport (
 	number text PRIMARY KEY,
 	first_name text NOT NULL,
 	last_name text NOT NULL,
+	email text UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
 	address text NOT NULL,
 	phone int NOT NULL,
 	age int NOT NULL,
@@ -129,7 +146,7 @@ CREATE TABLE IF NOT EXISTS Price (
 	source text REFERENCES Airport(name) ON DELETE CASCADE ON UPDATE CASCADE,
 	destination text REFERENCES Airport(name) ON DELETE CASCADE ON UPDATE CASCADE,
 	class class_types NOT NULL,
-	prince int NOT NULL,
+	price int NOT NULL,
 	PRIMARY KEY(source, destination, class)
 );
 
@@ -144,7 +161,7 @@ CREATE TABLE IF NOT EXISTS Ticket (
 	seat_number int NOT NULL,
 	passenger_id text NOT NULL REFERENCES Passenger(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	flight_code text NOT NULL REFERENCES Flight(code) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (source, destination, class) REFERENCES Price
+	FOREIGN KEY (source, destination, class) REFERENCES Price ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Trigger to check if the current date is before the travelling date\
@@ -161,10 +178,29 @@ CREATE TYPE account_types as ENUM (
 	'passenger'
 );
 
+-- 2 Triggers check if email exists, and for checking null
 CREATE TABLE IF NOT EXISTS Account (
 	email text PRIMARY KEY CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
 	password text NOT NULL,
 	type account_types NOT NULL,
 	passenger_id text REFERENCES Passenger(id) ON DELETE CASCADE ON UPDATE CASCADE,
 	employee_ssn int REFERENCES Employee(ssn) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS Price_history (
+	changed_on date NOT NULL,
+	source text NOT NULL,
+	destination text NOT NULL, 
+	class class_types NOT NULL,
+	old_price int NOT NULL,
+	new_price int NOT NULL,
+	FOREIGN KEY (source, destination, class) REFERENCES Price ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY (changed_on, source, destination, class)	
+);
+
+
+CREATE TABLE IF NOT EXISTS Delayed_flights (
+	code text PRIMARY KEY REFERENCES Flight,
+	report_time timestamp	
 );

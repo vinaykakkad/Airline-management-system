@@ -1,0 +1,27 @@
+{% extends 'base/base.html'%}
+
+{% block head %}
+<title>Login</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="auth-body">
+	<div class="container my-5 center-mx auth-box">
+		<form action="#" method="POST">
+			<div class="container auth-box-heading">
+				<img src="{{ url_for('static', filename='images/logo.png' )}}" alt="" width="100px" class="mx-auto">
+				<br>
+				Welcome back! 👋
+			</div>
+			<input type="text" class="form-control fields" autocomplete="off" placeholder="Your Email">
+			<input type="password" class="form-control fields" autocomplete="off" placeholder="Your Password">
+			<button type="submit" class="btn my-4 primary-button w-100 py-2 fw-bold">Log in</button>
+		</form>
+		<div class="container p-0 pb-4 auth-box-footer text-center">
+			<a href="#" class="fw-bold">Forgot your Password??</a><br>
+			Don't have an account yet?&emsp13;<a href="#" class="fw-bold">Sign up</a>
+		</div>
+	</div>
+</section>
+{% endblock %}
