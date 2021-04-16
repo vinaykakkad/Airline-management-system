@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section id="home-body">
+	<div class="row px-0 py-5 banner mx-auto">
+		<div class="col-md-5 order-1 order-md-2 mx-0 mb-5 p-0 d-flex justify-content-center align-items-center">
+			<div class="container d-flex justify-content-center align-items-center banner-image-box">
+				<img src="{{ url_for('static', filename='images/banner.png') }}" class="banner-image" alt="">
+			</div>
+		</div>
+		<div class="col-md-7 order-2 order-md-1 d-flex justify-content-center align-items-center mx-0 mb-5 px-2 px-sm-5 pr-md-0 home-heading">
+			<div class="container">
+				<h1>Fly high anytime, to anywhere for anything</h1>
+				<div class="heading-underline mb-3 mx-auto mx-md-0"></div>
+				<p class="home-subtitle">
+					Remember, planes actually like to stay in the air. They have lift – so you’re safer in the air anyways!
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

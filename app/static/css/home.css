@@ -1,0 +1,41 @@
+.banner {
+	width: 90%;
+}
+
+.home-heading {
+    text-align: left;
+}
+
+.home-heading h1 {
+    color: var(--primary);
+    font-size: 48px;
+    font-weight: 700;
+}
+.heading-underline {
+    border: 2px solid var(--primary);
+    width: 90%;
+}
+.home-heading p {
+    font-size: 20px;
+    color: var(--dark-gray);
+    font-style: italic;
+}
+@media screen and ( max-width: 1000px) {
+    .home-heading h1 {
+        font-size: 36px;
+        font-weight: 600;
+    }
+}
+@media screen and ( max-width: 767px) {
+    .home-heading h1 {
+        text-align: center;
+    }
+
+	.banner {
+		width: 100%;
+	}
+}
+
+.banner-image {
+    width: 100%;
+}
