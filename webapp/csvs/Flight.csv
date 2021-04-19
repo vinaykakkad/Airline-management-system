@@ -1,0 +1,8 @@
+﻿6E8273,Chhatrapati Shivaji Maharaj International Airport,Jomo Kenyatta International Airport,0.75,0.645833333,delay,4hrs,direct,0,0,AI
+AI9808,Dubai International Airport,Changi Airport,0.506944444,0.670138889,on-time,0.996527778,connecting,3hrs ,1,EK
+EK7634,London Heathrow Airport,Kempegowda International Airport,0.597222222,0.371527778,delay,0.586805556,connecting,3hrs ,1,BA
+EY8909,Changi Airport,Logan International Airport,0.902777778,0.59375,on-time,28hrs,connecting,7hrs,1,SQ
+G88975,Dubai International Airport,Kempegowda International Airport,0.138888889,0.371527778,on-time,4hrs,direct,0,0,G8
+BA5432,Chhatrapati Shivaji Maharaj International Airport,Geneva International Airport,0.1875,0.538194444,delay,12hrs,connecting,2hrs,1,EY
+SQ1290,Dubai International Airport,Logan International Airport,0.621527778,0.829861111,on-time,7hrs,direct,0,0,QR
+QR8734,Melbourne Airport,Geneva International Airport,0.885416667,0.802083333,delay,30hrs,connecting,10hrs,1,EK
