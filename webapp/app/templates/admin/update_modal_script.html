@@ -1,0 +1,25 @@
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		let updateModal = document.getElementById('update-modal');
+		const columnData = {{ column_data|tojson }};
+		
+		// console.log(columnData);
+		updateModal.addEventListener('show.bs.modal', function (event) {
+			let button = event.relatedTarget;
+			var whereCondition = '';
+			
+			columnData.forEach(element => {
+				let value = button.getAttribute(`data-bs-${element['column_name']}`);
+				let input = updateModal.querySelector(`#${element['column_name']}`);
+				
+				input.value = value;
+				whereCondition = element['data_type'] === 'integer' 
+								? `${whereCondition}${element['column_name']}=${value},` 
+								: `${whereCondition}${element['column_name']}='${value}',`
+			});
+
+			let whereInput = updateModal.querySelector('#where-condition');
+			whereInput.value = whereCondition;
+		});
+	});
+</script>

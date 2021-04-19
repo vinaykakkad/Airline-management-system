@@ -1,0 +1,28 @@
+@media screen and (min-width:769px) {
+	.admin-table-main {
+		width: 80%;
+	}
+}
+
+.box {
+	background-color: var(--primary);
+	color: var(--base);
+}
+
+.box:hover {
+	cursor: pointer;
+}
+
+.box a,
+.box:hover a {
+	color: var(--base);
+}
+
+.table-head {
+	background-color: var(--primary-dark-1);
+	color: var(--base);
+}
+
+.row-even {
+	border-bottom: 2px solid var(--light-gray);
+}

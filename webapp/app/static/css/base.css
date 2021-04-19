@@ -114,3 +114,7 @@ footer a:hover {
 	color: var(--base);
 }
 
+.w-full {
+	width: 100%;
+}
+

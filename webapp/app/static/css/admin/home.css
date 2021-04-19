@@ -1,0 +1,19 @@
+@media screen and (min-width:769px) {
+	.admin-home-main {
+		width: 80%;
+	}
+}
+
+.box {
+	background-color: var(--primary);
+	color: var(--base);
+}
+
+.box:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-1);
+}
+
+.instances {
+	font-size: 72px;
+}

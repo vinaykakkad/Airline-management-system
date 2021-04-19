@@ -38,7 +38,11 @@ def create_app():
     app.config.from_object(DevelopmentConfig)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    app.jinja_env.filters['zip'] = zip
+
     with app.app_context():
+        from .routes import auth
         from .routes import general
+        from .routes import admin
 
     return app

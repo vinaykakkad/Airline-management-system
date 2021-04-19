@@ -1,0 +1,90 @@
+<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="add-modal-label"
+	aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="add-modal-label">Add Record</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<form action="{{ url_for('admin_add_route', table_name=table_name) }}" method="POST">
+				<div class="modal-body">
+					{% for column in column_data %}
+					<div class="row mb-3">
+						<label for="{{ column['column_name'] }}"
+							class="col-lg-2 col-form-label text-captialize">
+							{{ column['column_name'] }}
+						</label>
+						<div class="col-lg-10">
+							{% if column['column_name']=='address' %}
+							<textarea class="form-control" id="{{ column['column_name'] }}" name="{{ column['column_name'] }}" cols="30" rows="7"></textarea>
+							{% elif column['column_name']=='email' %}
+							<input type="email" class="form-control"
+								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
+							{% elif column['column_name']=='password' %}
+							<input type="password" class="form-control"
+								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
+							{% elif column['data_type']=='date' %}
+							<input type="date" class="form-control"
+								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
+							{% elif column['data_type']=='integer' %}
+							<input type="number" class="form-control"
+								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
+							{% elif column['column_name']=='sex' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="male">Male</option>
+								<option value="female">Female</option>
+								<option value="rather not say">Rather not say</option>
+							</select>
+							{% elif column['column_name']=='status' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="on-time">On time</option>
+								<option value="delay">Delayed</option>
+							</select>
+							{% elif column['column_name']=='flight_type' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="connecting">Connecting</option>
+								<option value="direct">Dierect</option>
+							</select>
+							{% elif column['column_name']=='type' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="admin">Admin</option>
+								<option value="employee">Employee</option>
+								<option value="passenger">Passenger</option>
+							</select>
+							{% elif column['column_name']=='job_type' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="Administration">Administration</option>
+								<option value="Engineer">Engineer</option>
+								<option value="Traffic_Monitor">Traffic_Monitor</option>
+								<option value="Airport_Authotiy">Airport_Authotiy</option>
+							</select>
+							{% elif column['column_name']=='class' %}
+							<select class="form-select" name="{{ column['column_name'] }}"
+								id="{{ column['column_name'] }}">
+								<option value="first">First</option>
+								<option value="buisness">Buisness</option>
+								<option value="economy">Economy</option>
+							</select>
+							{% else %}
+							<input type="text" class="form-control" id="{{ column['column_name'] }}"
+								name="{{ column['column_name'] }}">
+							{% endif %}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn primary-button">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
