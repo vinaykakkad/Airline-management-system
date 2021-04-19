@@ -55,8 +55,6 @@ def get_table_info(table_name):
 def get_table_info_records(table_name):
 	column_data = get_table_info(table_name)
 
-	print(column_data['data'])
-
 	if column_data['success']:
 		records = list()
 		query = f'SELECT * FROM {table_name};'
@@ -85,19 +83,25 @@ def get_table_info_records(table_name):
 
 
 def delete_record(table_name, where_condition):
-	query = f"DELETE FROM {table_name} WHERE {where_condition};"
-
+	query = f"DELETE FROM {table_name} WHERE ({where_condition});"
+	print(query)
 	return error_handler(query)
 	
 
 def add_record(table_name, values):
 	query = f"INSERT INTO {table_name} VALUES({values});"
-
+	print(query)
 	return error_handler(query)	
 
 
 def update_record(table_name, set_values, where_condition):
 	query = f"UPDATE {table_name} SET {set_values} WHERE ({where_condition})"
+
+	return error_handler(query)
+
+
+def add_account(email, password, type):
+	query = f"CALL add_account('{email}', '{password}', '{type}');"
 
 	return error_handler(query)
 

@@ -14,12 +14,16 @@
 				<br>
 				Sign Up! 👋
 			</div>
-			<input type="text" class="form-control fields" autocomplete="off" placeholder="Email">
-			<input type="password" class="form-control fields" autocomplete="off" placeholder="Password">
+			<input type="text" class="form-control fields" name="email" autocomplete="off" placeholder="Email">
+			<input type="password" class="form-control fields" name="password" autocomplete="off" placeholder="Password">
+			<select name="type" class="form-select fields py-0" style=" height:50px;">
+				<option value="employee">Employee</option>
+				<option value="passenger">Passsenger</option>
+			</select>
 			<button type="submit" class="btn my-4 primary-button w-100 py-2 fw-bold">Create account</button>
 		</form>
 		<div class="container p-0 pb-4 auth-box-footer text-center">
-			Already have an account?&emsp13;<a href="{{ url_for('login_page_view') }}" class="fw-bold">Log in</a>
+			Already have an account?&emsp13;<a href="{{ url_for('login_page_route') }}" class="fw-bold">Log in</a>
 		</div>
 	</div>
 </section>

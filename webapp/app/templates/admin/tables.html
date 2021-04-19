@@ -65,7 +65,7 @@
 							<input 
 								type="hidden" 
 								name="record" 
-								value="{% for column in column_data %}{{ column['column_name'] }}={% if column['data_type']=='int' %}{{ record[column['column_name']] }}{% else %}'{{ record[column['column_name']] }}'{% endif %},{% endfor %}" 
+								value="{% for column in column_data %}{% if record[column['column_name']]==None %}{% else %}{{ column['column_name'] }}={% if column['data_type']=='integer' %}{{ record[column['column_name']] }}{% else %}'{{ record[column['column_name']] }}'{% endif %},{%endif%}{% endfor %}" 
 								class="m-0 p-0"
 							>
 							<button type="submit" class="btn primary-button">Delete</button>

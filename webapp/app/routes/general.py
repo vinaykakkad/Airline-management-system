@@ -1,28 +1,36 @@
+import csv, os
+
 from flask import current_app as app
 from flask import render_template, request
 
-from ..connection.main import trial_insert
+from ..connection.utils import get_table_info, add_record
 
 @app.route("/")
 def home_page_view():
     return render_template('home/home.html')
 
 
-@app.route("/login")
-def login_page_view():
-    return render_template('auth/login.html')
+@app.route("/temp_add/<table_name>")
+def test_route(table_name):
+    print(str(table_name).lower())
+    result = get_table_info(str(table_name).lower())
 
+    if not result['success']:
+        return 'there was some error in the table_name'
 
-@app.route("/register")
-def register_page_view():
-    return render_template('auth/register.html')
+    with open(f'csvs/{table_name}.csv', encoding="utf-8-sig") as file:
+        reader = csv.reader(file, delimiter=',')
 
+        for row in reader:
+            values = str()
 
-@app.route("/test")
-def test_route():
-    city = request.args.get('city')
-    state = request.args.get('state')
-    country = request.args.get('country')
+            for col, col_info in zip(row, result['data']):
+                if (col_info['data_type'] == 'integer'):
+                    values = f"{values}, {str(col)}"
+                else:
+                    values = f"{values}, '{col}'"
 
-    result = trial_insert(city, state, country)
-    return str(result)
+            temp = add_record(table_name, values[2:])
+            print(temp['data'])        
+
+    return 'done' if temp['success'] else 'not done'

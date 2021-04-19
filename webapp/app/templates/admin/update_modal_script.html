@@ -13,9 +13,11 @@
 				let input = updateModal.querySelector(`#${element['column_name']}`);
 				
 				input.value = value;
-				whereCondition = element['data_type'] === 'integer' 
-								? `${whereCondition}${element['column_name']}=${value},` 
-								: `${whereCondition}${element['column_name']}='${value}',`
+				if (value != 'None') {
+					whereCondition = element['data_type'] === 'integer' 
+									? `${whereCondition}${element['column_name']}=${value},` 
+									: `${whereCondition}${element['column_name']}='${value}',`
+				}
 			});
 
 			let whereInput = updateModal.querySelector('#where-condition');

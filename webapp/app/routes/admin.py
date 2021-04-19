@@ -32,6 +32,9 @@ def create_values(column_data, data, is_set):
 		key = column['column_name']
 		value = str(data[record]) if is_int else f"'{str(data[record])}'"
 
+		if(len(str(data[record])) == 0):
+			value = 'NULL'
+			
 		final = f"{key}={value}" if is_set else value
 
 		values = f"{values}, {final}"
