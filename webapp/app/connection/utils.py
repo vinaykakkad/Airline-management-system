@@ -84,13 +84,13 @@ def get_table_info_records(table_name):
 
 def delete_record(table_name, where_condition):
 	query = f"DELETE FROM {table_name} WHERE ({where_condition});"
-	print(query)
+
 	return error_handler(query)
 	
 
 def add_record(table_name, values):
 	query = f"INSERT INTO {table_name} VALUES({values});"
-	print(query)
+
 	return error_handler(query)	
 
 
@@ -101,15 +101,13 @@ def update_record(table_name, set_values, where_condition):
 
 
 def add_account(email, password, type):
-	query = f"CALL add_account('{email}', '{password}', '{type}');"
+	query_text = f"call add_account('{email}', '{password}', '{type}');"
+	query = text(query_text).execution_options(autocommit=True)
 
 	return error_handler(query)
 
 
-# def select_particulat_record(table_name, where_condition):
-# 	query = f"SELECT * FROM {table_name} WHERE {where_condition};"
-# 	result = None
+def select_particulat_record(table_name, where_condition):
+	query = f"SELECT * FROM {table_name} WHERE {where_condition};"
 
-# 	try:
-# 		result = db.engine.execute(query)
-# 	exec SQLAlchemyError as e
+	return error_handler(query)

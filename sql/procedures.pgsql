@@ -12,6 +12,7 @@ BEGIN
 		WHERE email = acc_email;
 
 		IF parent_record IS NOT NULL THEN
+			Raise Notice 'hello world';
 			INSERT INTO Account(email, password, type, employee_ssn) VALUES(acc_email, acc_pass, acc_type, parent_record.ssn);
 		ELSE
 			RAISE exception 'You should use the email connected with your SSN for registration';
@@ -22,6 +23,7 @@ BEGIN
 		WHERE email = acc_email;
 
 		IF parent_record IS NOT NULL THEN
+			Raise Notice 'hello world';
 			INSERT INTO Account(email, password, type, passenger_number) VALUES(acc_email, acc_pass, acc_type, parent_record.passport_number);
 		ELSE
 			RAISE exception 'You should use the email connected with your passport for registration';
