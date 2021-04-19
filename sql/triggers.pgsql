@@ -11,38 +11,40 @@ BEGIN
 			RAISE exception 'In direct flights stops and layover time should be zero';
 		END IF;
 	END IF;
+	RETURN NULL;
 END;
 $flight_check_zeros$
 LANGUAGE plpgsql;
 
--- CREATE TRIGGER flight_check_zeros 
--- 	BEFORE INSERT OR UPDATE 
--- 	ON Flight 
--- 	FOR EACH ROW
--- 		EXECUTE FUNCTION flight_check_zeros()
+CREATE TRIGGER flight_check_zeros 
+	BEFORE INSERT OR UPDATE 
+	ON Flight 
+	FOR EACH ROW
+		EXECUTE FUNCTION flight_check_zeros();
 
 
 -- If a passenger register, then he should have a passpert with the email connected to it
 -- A trigger on account to enforce this
 CREATE OR REPLACE FUNCTION account_check_email () RETURNS TRIGGER AS $account_check_email$
 DECLARE
-	r_passenger Passport%rowtype;
+	r_passenger Passenger%rowtype;
 BEGIN
 	IF NEW.type = 'passenger' THEN
-		SELECT * FROM passport INTO r_passenger WHERE email = NEW.email;
+		SELECT * FROM passenger INTO r_passenger WHERE email = NEW.email;
 		IF NOT FOUND THEN
 			RAISE exception 'You should enter the email connected to your passport';
 		END IF; 
 	END IF;
+	RETURN NEW;
 END;
 $account_check_email$
 LANGUAGE plpgsql;
 
--- CREATE TRIGGER account_check_email 
--- 	BEFORE INSERT OR UPDATE 
--- 	ON Account
--- 	FOR EACH ROW
--- 		EXECUTE FUNCTION account_check_email()
+CREATE TRIGGER account_check_email 
+	BEFORE INSERT OR UPDATE 
+	ON Account
+	FOR EACH ROW
+		EXECUTE FUNCTION account_check_email();
 
 
 -- Foreign keys related to types other than the account type should be null
@@ -54,22 +56,24 @@ BEGIN
 			RAISE exception 'Foreign Key to employee_ssn should be null for passenger account';
 		END IF; 
 	END IF;
-	IF NEW.type = 'empolyee' THEN
+	IF NEW.type = 'employee' THEN
 		IF NEW.passenger_id != NULL THEN
 			RAISE exception 'Foreign Key to passenger_id should be null for employee account';
 		END IF; 
 	END IF;
+	RETURN NEW;
 END;
 $account_check_null$
 LANGUAGE plpgsql;
 
--- CREATE TRIGGER account_check_null 
--- 	BEFORE INSERT OR UPDATE 
--- 	ON Account
--- 	FOR EACH ROW
--- 		EXECUTE FUNCTION account_check_null()
+CREATE TRIGGER account_check_null 
+	BEFORE INSERT OR UPDATE 
+	ON Account
+	FOR EACH ROW
+		EXECUTE FUNCTION account_check_null();
 
 
+-- Add remove fligt from the delayed flight table based on the status of the flight
 CREATE OR REPLACE FUNCTION track_delayed_flight () RETURNS TRIGGER AS $track_delayed_flight$
 DECLARE
 	r_delayed Delayed_flights%rowtype;
@@ -85,16 +89,19 @@ BEGIN
 			DELETE FROM Delayed_flights WHERE code=NEW.code;
 		END IF;
 	END IF;
+	RETURN NULL;
 END;
 $track_delayed_flight$
 LANGUAGE plpgsql;
 
--- CREATE TRIGGER track_delayed_flight 
--- 	BEFORE INSERT OR UPDATE 
--- 	ON Flight
--- 	FOR EACH ROW
--- 		EXECUTE FUNCTION track_delayed_flight()
+CREATE TRIGGER track_delayed_flight 
+	BEFORE INSERT OR UPDATE 
+	ON Flight
+	FOR EACH ROW
+		EXECUTE FUNCTION track_delayed_flight();
 
+
+-- To track all the price changes and store them
 CREATE OR REPLACE FUNCTION track_price_change () RETURNS TRIGGER AS $track_price_change$
 BEGIN
 	INSERT INTO Price_history VALUES (
@@ -105,6 +112,7 @@ BEGIN
 		OLD.price,
 		NEW.price	
 	);
+	RETURN NULL;
 END;
 $track_price_change$
 LANGUAGE plpgsql;
@@ -113,4 +121,4 @@ CREATE TRIGGER track_price_change
 	BEFORE UPDATE 
 	ON Price
 	FOR EACH ROW
-		EXECUTE FUNCTION track_price_change()
+		EXECUTE FUNCTION track_price_change();

@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS Country(
 	city text,
 	state text,
-	country text,
+	country text NOT NULL,
 	PRIMARY KEY(city, state)
 );
 
@@ -34,7 +34,7 @@ CREATE TYPE job_types as ENUM (
 	'Administration',
 	'Engineer',
 	'Traffic_Monitor',
-	'Airport_Authotiy'
+	'Airport_Authority'
 );
 
 CREATE TABLE IF NOT EXISTS Salary (
@@ -54,9 +54,9 @@ CREATE TABLE IF NOT EXISTS Employee (
 	ssn int PRIMARY KEY,
 	first_name text NOT NULL,
 	last_name text NOT NULL,
-	email text UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
+	email text NOT NULL UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
 	address text NOT NULL,
-	phone char(10) NOT NULL CHECK(phone ~ '[0-9]*10'),
+	phone char(10) NOT NULL CHECK(phone not like '%[^0-9]%'),
 	birthdate date NOT NULL,
 	sex gender NOT NULL,
 	job_type job_types NOT NULL REFERENCES Salary ON DELETE CASCADE ON UPDATE CASCADE,
@@ -94,7 +94,7 @@ CREATE TYPE status_types as ENUM (
 	'delay'
 );
 
--- Trigger to check the fields that needs to be null
+-- Trigger to check the fields that needs to be 0
 CREATE TABLE IF NOT EXISTS Flight (
 	code char(6) PRIMARY KEY,
 	source text NOT NULL REFERENCES Airport(name) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -113,9 +113,9 @@ CREATE TABLE IF NOT EXISTS Passenger (
 	passport_number text PRIMARY KEY,
 	first_name text NOT NULL,
 	last_name text NOT NULL,
-	email text UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
+	email text NOT NULL UNIQUE CHECK (email ~ '^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})*$'),
 	address text NOT NULL,
-	phone char(10) NOT NULL CHECK(phone ~ '[0-9]*10'),
+	phone char(10) NOT NULL CHECK(phone not like '%[^0-9]%'),
 	birthdate date NOT NULL,
 	sex gender NOT NULL
 );
