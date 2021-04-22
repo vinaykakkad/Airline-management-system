@@ -2,8 +2,8 @@
 
 {% block head %}
 <title>Home</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin/tables.css') }}">
-{% include 'admin/update_modal_script.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+{% include 'table/update_modal_script.html' %}
 {% endblock %}
 
 {% block content %}
@@ -60,7 +60,7 @@
 						</button>
 					</td>
 					<td>
-						<form action="{{ url_for('admin_delete_route')}}" method="post" class="m-0 p-0">
+						<form action="{{ url_for('delete_record_route')}}" method="post" class="m-0 p-0">
 							<input type="hidden" name="table_name" value="{{table_name}}" class="m-0 p-0">
 							<input 
 								type="hidden" 
@@ -77,7 +77,7 @@
 			</tbody>
 		</table>
 	</div>
-	{% include 'admin/update_modal.html' %}
-	{% include 'admin/add_modal.html' %}
+	{% include 'table/update_modal.html' %}
+	{% include 'table/add_modal.html' %}
 </section>
 {% endblock %}

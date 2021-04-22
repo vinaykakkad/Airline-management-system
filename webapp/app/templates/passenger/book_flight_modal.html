@@ -1,0 +1,47 @@
+<div class="modal fade" id="book_flight-modal" tabindex="-1"
+	aria-labelledby="book_flight-modal-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="book_flight-modal-label">Book Flight</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<form action="{{ url_for('book_tickets_route') }}" method="POST">
+				<div class="modal-body">
+					<!-- Hidden Data -->
+					<input type="hidden" name="source" id="source">
+					<input type="hidden" name="destination" id="destination">
+					<input type="hidden" name="code" id="code">
+					<div class="row mb-3">
+						<label for="class" class="col-sm-2 col-form-label">Class</label>
+						<div class="col-sm-10">
+							<select class="form-select" name="class" id="class">
+								<option value="first">First</option>
+								<option value="buisness">Buisness</option>
+								<option value="economy">Economy</option>
+							</select>
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="travelling_date" class="col-sm-2 col-form-label">Travelling<br>Date</label>
+						<div class="col-sm-10">
+							<input type="date" class="form-control" name="travelling_date" id="travelling_date">
+						</div>
+					</div>
+					<div class="row mb-3">
+						<label for="seat" class="col-sm-2 col-form-label">Seat</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="seat" id="seat">
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn primary-button">Add</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>

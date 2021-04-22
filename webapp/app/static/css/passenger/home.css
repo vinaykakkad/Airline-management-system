@@ -1,0 +1,16 @@
+@media screen and (min-width:769px) {
+	.passenger-home-main {
+		width: 80%;
+		min-height: 80vh;
+	}
+}
+
+.box {
+	background-color: var(--primary);
+	color: var(--base);
+}
+
+.box:hover {
+	cursor: pointer;
+	background-color: var(--primary-dark-1);
+}

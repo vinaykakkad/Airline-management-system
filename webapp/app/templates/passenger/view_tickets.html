@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/passenger/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="mx-auto passenger-home-main">
+	<div class="table-responsive px-2 px-md-4 my-5">
+		<table class="table table-hover">
+			<thead class="text-captialize table-head py-5">
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Ticket Number</th>
+					<th scope="col">Source</th>
+					<th scope="col">Destination</th>
+					<th scope="col">Class</th>
+					<th scope="col">Travelling Date</th>
+					<th scope="col">Seat Number</th>
+					<th scope="col">Flight Code</th>
+					<th scope="col">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for row in data %}
+				<tr class="rows">
+					<th scope="row">{{ loop.index }}
+					</th>
+					{% for col in row %}
+					<td>{{ col }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</section>
+{% endblock %}

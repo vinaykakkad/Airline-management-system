@@ -1,16 +1,14 @@
-<div class="modal fade" id="update-modal" tabindex="-1" aria-labelledby="update-modal-label"
+<div class="modal fade" id="add-modal" tabindex="-1" aria-labelledby="add-modal-label"
 	aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="update-modal-label">Update Record</h5>
+				<h5 class="modal-title" id="add-modal-label">Add Record</h5>
 				<button type="button" class="btn-close" data-bs-dismiss="modal"
 					aria-label="Close"></button>
 			</div>
-			<form action="{{ url_for('admin_update_route', table_name=table_name) }}" method="POST">
+			<form action="{{ url_for('add_record_route', table_name=table_name) }}" method="POST">
 				<div class="modal-body">
-					<input type="hidden" name="where-condition" class="m-0 p-0"
-						id="where-condition">
 					{% for column in column_data %}
 					<div class="row mb-3">
 						<label for="{{ column['column_name'] }}"
@@ -19,8 +17,7 @@
 						</label>
 						<div class="col-lg-10">
 							{% if column['column_name']=='address' %}
-							<textarea class="form-control" id="{{ column['column_name'] }}"
-								name="{{ column['column_name'] }}" cols="30" rows="7"></textarea>
+							<textarea class="form-control" id="{{ column['column_name'] }}" name="{{ column['column_name'] }}" cols="30" rows="7"></textarea>
 							{% elif column['column_name']=='email' %}
 							<input type="email" class="form-control"
 								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
@@ -28,8 +25,8 @@
 							<input type="password" class="form-control"
 								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
 							{% elif column['data_type']=='date' %}
-							<input type="date" class="form-control" id="{{ column['column_name'] }}"
-								name="{{ column['column_name'] }}">
+							<input type="date" class="form-control"
+								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
 							{% elif column['data_type']=='integer' %}
 							<input type="number" class="form-control"
 								id="{{ column['column_name'] }}" name="{{ column['column_name'] }}">
@@ -90,5 +87,4 @@
 			</form>
 		</div>
 	</div>
-</div>
 </div>

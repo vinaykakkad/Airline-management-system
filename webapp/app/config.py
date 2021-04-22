@@ -41,8 +41,6 @@ def create_app():
     app.jinja_env.filters['zip'] = zip
 
     with app.app_context():
-        from .routes import auth
-        from .routes import general
-        from .routes import admin
+        from .routes import general, admin, employee, passenger
 
     return app

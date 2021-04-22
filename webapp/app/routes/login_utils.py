@@ -8,6 +8,19 @@ from ..connection.utils import select_particulat_record
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+def check_password(email, password):
+	where_condition = f"email='{email}'"
+	response = select_particulat_record('account', where_condition)
+
+	if not response['success']:
+		return False
+
+	db_password = None
+	for row in response['data']:
+		db_password = row[1]
+
+	return check_password_hash(db_password, password)
+
 
 class User(UserMixin):
 	pass
@@ -44,14 +57,14 @@ def request_loader(request):
 		if not response['success']:
 			return
 
-		type, password = None, None
+		type = None
 		for row in response['data']:
-			type, password = row[2], row[1]
+			type = row[2]
 
 		user = User()
 		user.id = email
 		user.type = type
 
-		user.is_authenticated = check_password_hash(password, form_pass)
+		user.is_authenticated = check_password(email, form_pass)
 
 		return user

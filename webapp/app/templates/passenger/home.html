@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Passenger | Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/passenger/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="row g-5 mx-auto my-5 px-2 px-md-4 passenger-home-main">
+	<div class="col-lg-6 d-flex px-2 px-md-4 mx-auto my-5">
+		<a href="{{ url_for('book_tickets_route') }}" class="w-full">
+			<div class="d-flex flex-center text-center rounded py-4 w-full box">
+				<h2 class="mb-0">Book Ticket</h2>
+			</div>
+		</a>
+	</div>
+	<div class="col-lg-6 d-flex px-2 px-md-4 mx-auto my-5">
+		<a href="{{ url_for('check_history_route') }}" class="w-full">
+			<div class="d-flex flex-center text-center rounded py-4 w-full box">
+				<h2 class="mb-0">Check History</h2>
+			</div>
+		</a>
+	</div>
+</div>
+{% endblock %}

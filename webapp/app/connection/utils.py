@@ -1,6 +1,4 @@
 from sqlalchemy import text
-from sqlalchemy.orm import query
-from sqlalchemy.sql.expression import false, null, true 
 from sqlalchemy.exc import SQLAlchemyError
 
 from .main import db
@@ -19,6 +17,8 @@ def error_handler(query):
 
 		
 def count_instances(table_name):
+	table_name = str(table_name).lower()
+
 	query = f'SELECT COUNT(*) FROM {table_name};'
 	result = error_handler(query)
 	
@@ -34,6 +34,9 @@ def count_instances(table_name):
 
 
 def get_table_info(table_name):
+	table_name = str(table_name).lower()
+
+
 	query = f"""SELECT column_name, data_type FROM information_schema.columns 
 				WHERE table_name='{table_name}' 
 				ORDER BY ordinal_position;"""
@@ -53,6 +56,8 @@ def get_table_info(table_name):
 
 
 def get_table_info_records(table_name):
+	table_name = str(table_name).lower()
+
 	column_data = get_table_info(table_name)
 
 	if column_data['success']:
@@ -83,18 +88,24 @@ def get_table_info_records(table_name):
 
 
 def delete_record(table_name, where_condition):
+	table_name = str(table_name).lower()
+
 	query = f"DELETE FROM {table_name} WHERE ({where_condition});"
 
 	return error_handler(query)
 	
 
 def add_record(table_name, values):
+	table_name = str(table_name).lower()
+
 	query = f"INSERT INTO {table_name} VALUES({values});"
 
 	return error_handler(query)	
 
 
 def update_record(table_name, set_values, where_condition):
+	table_name = str(table_name).lower()
+
 	query = f"UPDATE {table_name} SET {set_values} WHERE ({where_condition})"
 
 	return error_handler(query)
@@ -107,7 +118,16 @@ def add_account(email, password, type):
 	return error_handler(query)
 
 
+def book_ticket(email, source, destination, t_class, date, seat, code):
+	query_text = f"call book_ticket('{email}', '{source}', '{destination}', '{t_class}', '{date}', '{seat}', '{code}');"
+	query = text(query_text).execution_options(autocommit=True)
+
+	return error_handler(query)
+
+
 def select_particulat_record(table_name, where_condition):
+	table_name = str(table_name).lower()
+
 	query = f"SELECT * FROM {table_name} WHERE {where_condition};"
 
 	return error_handler(query)

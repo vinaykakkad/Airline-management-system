@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block head %}
+<title>Home</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+{% include 'passenger/book_flight_script.html' %}
+{% endblock %}
+
+{% block content %}
+<section class="admin-table-main mx-auto">
+	<div class="row mx-auto my-5 px-2 px-md-4">
+		<div class="col-lg-6 d-flex flex-center mx-auto my-3">
+			<div
+				class="d-flex flex-center text-center rounded fs-1 px-2 py-4 px-md-4 mx-auto w-full box">
+				<a href="#" class="w-full">
+					Filter Records
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="table-responsive px-2 px-md-4 my-5">
+		<table class="table table-hover">
+			<thead class="text-captialize table-head py-5">
+				<tr>
+					<th scope="col">#</th>
+					{% for record in column_data %}
+					<th scope="col">{{ record['column_name'] }}</th>
+					{% endfor %}
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for record in records %}
+				<tr class="rows">
+					<th scope="row">{{ loop.index }}
+					</th>
+					{% for data in column_data %}
+					<td>{{ record[data['column_name']] }}</td>
+					{% endfor %}
+					<td>
+						<button 
+							class="btn primary-button"
+							data-bs-toggle="modal"
+							data-bs-target="#book_flight-modal"
+							data-bs-source="{{ record['source'] }}"
+							data-bs-destination="{{ record['destination'] }}"
+							data-bs-code="{{ record['code'] }}"
+						>
+							Book
+						</button>
+					</td>
+					</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</section>
+{% include 'passenger/book_flight_modal.html' %}
+{% endblock %}

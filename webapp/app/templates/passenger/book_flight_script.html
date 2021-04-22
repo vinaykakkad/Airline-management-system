@@ -1,0 +1,24 @@
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		let bookFlightModal = document.getElementById('book_flight-modal');
+		
+		// console.log(columnData);
+		bookFlightModal.addEventListener('show.bs.modal', function (event) {
+			let button = event.relatedTarget;
+
+			let sourceValue = button.getAttribute('data-bs-source');
+			let sourceInput = bookFlightModal.querySelector('#source');
+			console.log(sourceValue, sourceInput);
+			sourceInput.value = sourceValue;
+
+			
+			let destinationValue = button.getAttribute('data-bs-destination');
+			let destinationInput = bookFlightModal.querySelector('#destination');
+			destinationInput.value = destinationValue;
+			
+			let codeValue = button.getAttribute('data-bs-code');
+			let codeInput = bookFlightModal.querySelector('#code');
+			codeInput.value = codeValue;
+		});
+	});
+</script>
