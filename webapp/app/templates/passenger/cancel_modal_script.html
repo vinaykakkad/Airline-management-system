@@ -1,0 +1,12 @@
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		var cancelModal = document.getElementById('cancel-modal')
+		cancelModal.addEventListener('show.bs.modal', function (event) {
+			var button = event.relatedTarget;
+			var recipient = button.getAttribute('data-bs-ticket_number');
+			var hiddenInput = cancelModal.querySelector('#ticket_number');
+
+			hiddenInput.value = recipient;
+		})
+	});
+</script>

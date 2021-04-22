@@ -125,6 +125,13 @@ def book_ticket(email, source, destination, t_class, date, seat, code):
 	return error_handler(query)
 
 
+def cancel_ticket(ticket_number):
+	query_text = f"CALL cancel_ticket(CAST({int(ticket_number)} AS BIGINT));"
+	query = text(query_text).execution_options(autocommit=True)
+
+	return error_handler(query)
+
+
 def select_particulat_record(table_name, where_condition):
 	table_name = str(table_name).lower()
 

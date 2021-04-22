@@ -16,7 +16,7 @@ traffic_monitor_modify = ['flight', 'ticket']
 
 administration_modify = ['passenger', 'ticket']
 
-employee_view = ['flight', 'price', 'passener', 'ticket']
+employee_view = ['flight', 'price', 'passenger', 'ticket']
 
 
 def has_view_permission(table_name):

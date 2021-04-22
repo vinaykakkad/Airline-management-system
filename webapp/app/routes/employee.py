@@ -4,7 +4,7 @@ from flask import render_template, request, redirect, url_for, flash
 from ..connection.utils import count_instances
 
 
-@app.route('/passenger')
+@app.route('/employee')
 def employee_home_route():
 	tables = [ 
 		{'table': 'Flight', 'name': 'Flights'},
@@ -22,4 +22,4 @@ def employee_home_route():
 		table['instances'] = response['data']
 		
 	context = {'tables': tables}
-	return render_template('passenger/home.html', **(context))
+	return render_template('employee/home.html', **(context))

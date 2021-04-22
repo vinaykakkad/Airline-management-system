@@ -3,10 +3,38 @@
 {% block head %}
 <title>Home</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/passenger/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tables.css') }}">
+{% include 'passenger/cancel_modal_script.html' %}
 {% endblock %}
 
 {% block content %}
 <section class="mx-auto passenger-home-main">
+	<div class="row mx-auto my-5 px-2 px-md-4">
+		<div class="col-lg-6 d-flex flex-center mx-auto my-3">
+			<div
+				class="d-flex flex-center text-center rounded fs-1 px-2 py-4 px-md-4 mx-auto w-full box">
+				<a class="w-full" href="{{ url_for('check_history_route')}}">
+					All Flights
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-6 d-flex flex-center mx-auto my-3">
+			<div
+				class="d-flex flex-center text-center rounded fs-1 px-2 py-4 px-md-4 mx-auto w-full box">
+				<a class="w-full" href="{{ url_for('check_history_filter', filter='completed')}}">
+					Completed Flights
+				</a>
+			</div>
+		</div>
+		<div class="col-lg-6 d-flex flex-center mx-auto my-3">
+			<div
+				class="d-flex flex-center text-center rounded fs-1 px-2 py-4 px-md-4 mx-auto w-full box">
+				<a class="w-full" href="{{ url_for('check_history_filter', filter='upcoming')}}">
+					Upcoming Flights
+				</a>
+			</div>
+		</div>
+	</div>
 	<div class="table-responsive px-2 px-md-4 my-5">
 		<table class="table table-hover">
 			<thead class="text-captialize table-head py-5">
@@ -20,6 +48,9 @@
 					<th scope="col">Seat Number</th>
 					<th scope="col">Flight Code</th>
 					<th scope="col">Status</th>
+					{% if request.path==url_for('check_history_filter', filter='upcoming') %}
+					<th scope="col"></th>
+					{% endif %}
 				</tr>
 			</thead>
 			<tbody>
@@ -30,10 +61,39 @@
 					{% for col in row %}
 					<td>{{ col }}</td>
 					{% endfor %}
+					{% if request.path==url_for('check_history_filter', filter='upcoming') %}
+					<td scope="col">
+						<button class="btn primary-button" data-bs-toggle="modal" data-bs-target="#cancel-modal" data-bs-ticket_number="{{ row[0] }}">
+							Cancel
+						</button>
+					</td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</tbody>
 		</table>
 	</div>
 </section>
+<div class="modal fade" id="cancel-modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">ATTENTION</h5>
+				<button type="button" class="btn-close"
+					data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Do you want to cancel? You will have to pay 25% surcharge</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary"
+					data-bs-dismiss="modal">No</button>
+				<form action="{{ url_for('cancel_ticket_route') }}" method="post">
+					<input type="hidden" name="ticket_number" id="ticket_number">
+					<button type="submit" class="btn primary-button">Yes, Cancel</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

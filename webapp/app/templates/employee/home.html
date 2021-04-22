@@ -9,7 +9,7 @@
 <div class="row g-5 mx-auto my-5 px-2 px-md-4 admin-home-main">
 	{% for table in tables %}
 	<div class="col-lg-6 d-flex px-2 px-md-4 mx-auto">
-		<a href="{{ url_for('admin_table_routes', table_name=table['table']) }}" class="w-full">
+		<a href="{{ url_for('view_table_route', table_name=table['table']) }}" class="w-full">
 			<div class="d-flex rounded py-4 w-full box">
 				<div class="col-9 flex-center text-center px-2 px-md-4">
 					<h2 class="m-0 p-0">{{ table['name'] }}</h2>

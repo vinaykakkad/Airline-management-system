@@ -26,9 +26,9 @@
 					{% if current_user.type=='admin'%}
 					<a class="nav-link text-center mx-auto px-3 nav-link-class" href="{{ url_for('admin_home_route') }}">Dashboard</a>
 					{% elif current_user.type=='employee'%}
-					<a class="nav-link text-center mx-auto px-3 nav-link-class" href="{{ url_for('passenger_home_route') }}">Dashboard</a>
-					{% else %}
 					<a class="nav-link text-center mx-auto px-3 nav-link-class" href="{{ url_for('employee_home_route') }}">Dashboard</a>
+					{% else %}
+					<a class="nav-link text-center mx-auto px-3 nav-link-class" href="{{ url_for('passenger_home_route') }}">Dashboard</a>
 					{% endif %}
 				</li>
 				{% endif %}
