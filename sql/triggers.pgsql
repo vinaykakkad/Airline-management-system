@@ -1,7 +1,3 @@
--- Possible triggers to create:
--- 	- Sql does not support one-one, trigger to ensure one-one between many tables
-
-
 -- If the flight is direct, no of stops should be zero and layover time should be zero
 -- A trigger on flight to enforce these conditions
 CREATE OR REPLACE FUNCTION flight_check_zeros() RETURNS TRIGGER AS $flight_check_zeros$
@@ -57,9 +53,11 @@ BEGIN
 		END IF; 
 	END IF;
 	IF NEW.type = 'employee' THEN
-		IF NEW.passenger_id != NULL THEN
-			RAISE exception 'Foreign Key to passenger_id should be null for employee account';
-		END IF; 
+		IF to_jsonb(NEW) ? 'passenger_id' THEN
+			IF NEW.passenger_id != NULL THEN
+				RAISE exception 'Foreign Key to passenger_id should be null for employee account';
+			END IF; 
+		END IF;
 	END IF;
 	RETURN NEW;
 END;
@@ -78,18 +76,20 @@ CREATE OR REPLACE FUNCTION track_delayed_flight () RETURNS TRIGGER AS $track_del
 DECLARE
 	r_delayed Delayed_flights%rowtype;
 BEGIN
-	IF NEW.status = 'delayed' THEN
+	IF NEW.status = 'delay' THEN
 		SELECT * FROM Delayed_flights INTO r_delayed WHERE code = NEW.code;
 		IF NOT FOUND THEN
 			INSERT INTO Delayed_flights VALUES (NEW.code, CURRENT_TIMESTAMP);
+			RETURN NEW;
 		END IF;
 	ELSE
 		SELECT * FROM Delayed_flights INTO r_delayed WHERE code = NEW.code;
 		IF FOUND THEN
 			DELETE FROM Delayed_flights WHERE code=NEW.code;
+			RETURN NEW;
 		END IF;
 	END IF;
-	RETURN NULL;
+	RETURN NEW;
 END;
 $track_delayed_flight$
 LANGUAGE plpgsql;
@@ -112,7 +112,7 @@ BEGIN
 		OLD.price,
 		NEW.price	
 	);
-	RETURN NULL;
+	RETURN NEW;
 END;
 $track_price_change$
 LANGUAGE plpgsql;

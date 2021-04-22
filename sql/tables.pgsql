@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS Airport_Authority (
 
 
 CREATE TYPE flight_types as ENUM (
-	'connectig',
+	'connecting',
 	'direct'
 );
 
@@ -145,13 +145,13 @@ CREATE TABLE IF NOT EXISTS Price (
 
 
 CREATE TABLE IF NOT EXISTS Ticket (
-	number int PRIMARY KEY,
+	number BIGSERIAL PRIMARY KEY,
 	source text NOT NULL,
 	destination text NOT NULL, 
 	class class_types NOT NULL,
 	booking_date date NOT NULL,
 	travelling_date date NOT NULL,
-	seat_number int NOT NULL,
+	seat_number text NOT NULL,
 	passenger_number text NOT NULL REFERENCES Passenger(passport_number) ON DELETE CASCADE ON UPDATE CASCADE,
 	flight_code char(6) NOT NULL REFERENCES Flight(code) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (source, destination, class) REFERENCES Price ON DELETE CASCADE ON UPDATE CASCADE
@@ -160,8 +160,8 @@ CREATE TABLE IF NOT EXISTS Ticket (
 
 -- Trigger to check if the current date is before the travelling date\
 CREATE TABLE IF NOT EXISTS Cancelled_tickets (
-	ticket_number int PRIMARY KEY REFERENCES Ticket(number) ON DELETE CASCADE ON UPDATE CASCADE,
-	cancellation_date date NOT NULL,
+	ticket_number BIGINT PRIMARY KEY REFERENCES Ticket(number) ON DELETE CASCADE ON UPDATE CASCADE,
+	cancellation_date date NOT NULL DEFAULT CURRENT_DATE,
 	surcharge int NOT NULL
 );
 
