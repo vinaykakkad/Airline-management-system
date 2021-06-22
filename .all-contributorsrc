@@ -1,0 +1,27 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "vinaykakkad",
+      "name": "Vinay Kakkad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56934712?v=4",
+      "profile": "https://github.com/vinaykakkad",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "Airline-management-system",
+  "projectOwner": "vinaykakkad",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
