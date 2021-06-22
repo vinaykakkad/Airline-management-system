@@ -1,7 +1,74 @@
-# Airline-management-system
+# Airline Management System ✈
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+Airline Management System made for the course Database Management System
+
+## Report 🧾
+
+Report contains description, database schemas, ER diagrams and screenshots
+
+[Report](https://drive.google.com/file/d/1jxFr9ybLeA09HHFTRGrl6VvEmVko_YtL/view)
+
+  
+## Environment Variables ⚙
+
+To run this project, you will need to add the following environment variables to a .env file 
+
+`DATABASE_URL` - Your postgreSQL database uri
+
+`SECRETY_KEY` - Secret key for the flask app
+
+  
+## Run Locally 🚀
+
+
+Clone the project
+
+```bash
+  git clone https://github.com/vinaykakkad/Airline-management-system.git
+```
+
+Creatre a virtual environment and activate
+
+```bash
+  python -m venv env
+
+  env\Scripts\activae
+```
+
+Install dependencies
+
+```bash
+  pip install -r requirements.txt
+```
+
+- Setup your postgreSQL database and add the database URI to environment variables
+
+- Run the sql scripts to add tables, functions, triggers and procedures to your databse 
+
+
+Run locally from the ```/webapp``` directory
+
+```bash
+  python app.py
+```
+
+  
+## Tech Stack
+
+**Frontend:** HTML, CSS, Bootstrap
+
+**Backend:** Flask
+
+**Database:** PostgreSQL
+  
+## License
+
+[MIT](https://github.com/vinaykakkad/Airline-management-system/blob/main/LICENSE)
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -21,3 +88,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+
+
+
+
+
+
+
+
+  
