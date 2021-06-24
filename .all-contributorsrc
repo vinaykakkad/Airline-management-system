@@ -16,6 +16,18 @@
         "design",
         "maintenance"
       ]
+    },
+    {
+      "login": "ankitdevani17",
+      "name": "Ankit Devani",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56442204?v=4",
+      "profile": "https://github.com/ankitdevani17",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
