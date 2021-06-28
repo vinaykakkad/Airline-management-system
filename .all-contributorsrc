@@ -40,6 +40,15 @@
         "design",
         "maintenance"
       ]
+    },
+    {
+      "login": "JeetKaria06",
+      "name": "Jeet Karia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50065408?v=4",
+      "profile": "https://www.linkedin.com/in/jeet-karia-628773170/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
