@@ -29,6 +29,18 @@
         "maintenance"
       ]
     }
+    {
+      "login": "tirth8205",
+      "name": "Tirth Bharatbhai Kanani",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56442204?v=4",
+      "profile": "https://github.com/tirth8205",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "maintenance"
+      ]
+    }
   ],
   "contributorsPerLine": 7,
   "projectName": "Airline-management-system",
