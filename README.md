@@ -36,7 +36,7 @@ Creatre a virtual environment and activate
 ```bash
   python -m venv env
 
-  env\Scripts\activae
+  env\Scripts\activate
 ```
 
 Install dependencies
